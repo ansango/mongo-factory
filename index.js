@@ -8,6 +8,9 @@ const { settings } = require("./settings.js");
     await client.connect();
     const db = client.db(DB);
     const collection = db.collection(COLLECTION);
+    if (!collection) {
+      await db.createCollection(collection);
+    }
     await collection.drop();
     let data = [];
     if (!ARRAY) {
